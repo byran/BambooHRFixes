@@ -42,4 +42,22 @@ $(document).ready(function() {
             myInfoTimeOffElement.html(holidayHtml);
         });
     }
+
+    const slickTrack = $('.slick-track .slick-slide div');
+    if(slickTrack.length > 0) {
+        const myInfoTimeOffElementX = slickTrack.first();
+        const newDiv = $("<div id=\"FixedTimeMyInfo\"></div>");
+
+        myInfoTimeOffElementX.prepend(newDiv);
+
+        const url_string = window.location.href
+        const url = new URL(url_string);
+        const employeeId = url.searchParams.get("id");
+
+        bambooFixesDownloadRemainingHoliday(employeeId, function(values) {
+            const holidayHtml = values.total;
+
+            newDiv.html(holidayHtml);
+        });
+    }
 });

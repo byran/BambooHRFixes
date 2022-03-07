@@ -12,6 +12,12 @@
     display: none;
 }
 
+#FixedTimeMyInfo {
+    background-color: black;
+    color: white;
+    position: absolute;
+}
+
 .TOCard__iconAndTime #FixedTime {
 	font-size: 36px;
 	height: 32px;
