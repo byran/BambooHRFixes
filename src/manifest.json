@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "BambooHR Fixes (Bluefruit)",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "Fix issues with BambooHR when used at Bluefruit",
     "permissions": ["declarativeContent"],
     "background": {

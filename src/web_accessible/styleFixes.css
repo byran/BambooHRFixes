@@ -3,7 +3,7 @@
     opacity: 1;
 }
 
-#FixedTime {
+.FixedTime {
     background-color: black;
     color: white;
 }

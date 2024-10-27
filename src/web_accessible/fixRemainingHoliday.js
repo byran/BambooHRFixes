@@ -17,31 +17,39 @@ function bambooFixesDownloadRemainingHoliday(employeeId, success) {
 }
 
 $(document).ready(function() {
-    const homeElements = $('.TimeOffWidget__type-available');
-    if(homeElements.length > 0) {
-        const homeTimeOffElement = homeElements.first();
+    if(window.common) {
+        const employeeId = window.common.employeeId;
+        const homeWrapper = $(`a[href='/employees/pto/?id=${employeeId}']`).first();
+        const homeElements = homeWrapper.find("h2 span");
+        if(homeElements.length > 0) {
+            const homeTimeOffElement = homeElements.last();
 
-        bambooFixesDownloadRemainingHoliday(window.common.employeeId, function(values) {
-            const holidayHtml = '<div id="FixedTime">' + values.total + '</div>'
+            bambooFixesDownloadRemainingHoliday(window.common.employeeId, function(values) {
+                const holidayHtml = `${values.total}`;
 
-            homeTimeOffElement.html(holidayHtml);
-        });
+                homeTimeOffElement.html(holidayHtml);
+                homeTimeOffElement.addClass('FixedTime');
+            });
+        }
     }
 
-    const myInfoElements = $('.TOCard__iconAndTime');
-    if(myInfoElements.length > 0) {
-        const myInfoTimeOffElement = myInfoElements.first();
+    setTimeout(() => {
+        const myInfoElements = $("div[aria-labelledby='policy-card-title-1'] h3");
+        if(myInfoElements.length > 0) {
+            const myInfoTimeOffElement = myInfoElements.first();
 
-        const url_string = window.location.href
-        const url = new URL(url_string);
-        const employeeId = url.searchParams.get("id");
+            const url_string = window.location.href
+            const url = new URL(url_string);
+            const employeeId = url.searchParams.get("id");
 
-        bambooFixesDownloadRemainingHoliday(employeeId, function(values) {
-            const holidayHtml = '<div id="FixedTime">' + values.total + '</div>'
+            bambooFixesDownloadRemainingHoliday(employeeId, function(values) {
+                const holidayHtml = `${values.total}&nbsp;Days`
 
-            myInfoTimeOffElement.html(holidayHtml);
-        });
-    }
+                myInfoTimeOffElement.html(holidayHtml);
+                myInfoTimeOffElement.addClass('FixedTime');
+            });
+        }
+    }, 2000);
 
     const slickTrack = $('.slick-track .slick-slide div');
     if(slickTrack.length > 0) {
